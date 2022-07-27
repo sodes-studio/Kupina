@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kupina demo</title>
+    <style>
+        .groupbox {
+          background-color: snow;
+          border: 1px solid gray;
+          margin-top: 1.5em;
+          padding: 1em .7em .7em .7em;
+          position: relative;
+        }
+        .groupbox ::before {
+          background-color: white;
+          color: slategray;
+          content: "Kupina hash";
+          left: 1em;
+          padding: 0 .3em;
+          position: absolute;
+          top: -.7em ;
+        }
+    </style>
+</head>
+<body>
+    <div class="groupbox">
+        <span>Select hash size (bits): </span>
+        <label><input type="radio" name="hash-size" value="128"/>128</label>
+        <label><input type="radio" name="hash-size" value="256" checked>256</label>
+        <label><input type="radio" name="hash-size" value="512"/>512</label>
+        <br/>
+        <span>Enter data to hash: </span>
+        <input name="data" />
+        <label><input type="radio" name="encoding" value="utf" checked/>UTF-8</label>
+        <label><input type="radio" name="encoding" value="hex"/>HEX</label>
+        <br/>
+        <button onclick="hash(event)">Get hash</button>
+        <b></b>
+    </div>
+    <script src="../src/kupina.js"></script>
+    <script>
+        function hash(e) {
+            const grpbox = e.target.parentNode;
+            const rbSize = grpbox.querySelector( "input[name='hash-size']:checked" ) ;
+            if( ! rbSize ) {
+                alert( "Select hash size (radiobutton)" ) ;
+                return ;
+            }
+            const rbEnc = grpbox.querySelector( "input[name=encoding]:checked" ) ;
+            if( ! rbEnc ) {
+                alert( "Select encoding mode (radiobutton)" ) ;
+                return ;
+            }
+            const b = grpbox.querySelector( "b" ) ;
+            const data = grpbox.querySelector( "input[name=data]" ) ;
+            const kupina = new Kupina( Number( rbSize.value ) ) ;
+            var hashMode = "UTF8" ;
+            if( rbEnc.value == 'hex' ) hashMode = "HEX" ;
+            b.innerText = kupina.digest( data.value, hashMode ) ;
+        }
+    </script>
+</body>
+</html>

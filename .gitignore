@@ -1,0 +1,7 @@
+# Java
+Java/nbproject
+Java/.idea
+Java/target
+*.class
+*.jar
+*.war
