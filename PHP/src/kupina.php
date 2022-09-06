@@ -4,7 +4,7 @@ class Kupina {
 	private $hash_size ;        // hash (return) size in bits (n)
 	private $block_size ;       // state matrix size in bits  (l)
 	private $columns ;          // state matrix columns count (c)
-	private $Sbox ;             // S-boxes array
+	private $Sbox ;             // S-boxes array (non-linear transform)
     private $iterations ;       // iteration count (t)
 	private $shift ;            // shift values for tau-transform
 	private $v ;                // v array for psi-transform

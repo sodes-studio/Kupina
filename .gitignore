@@ -5,3 +5,4 @@ Java/target
 *.class
 *.jar
 *.war
+.vs/
